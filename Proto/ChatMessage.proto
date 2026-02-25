@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf2;
+
+message UserMessage {
+    string id = 1;
+    string senderId = 2;
+    string receiverId = 3;
+    string message = 4;
+    int64 timestamp = 5;
+    bool isRead = 6;
+}
+
+message UserMessageArray {
+    repeated UserMessage items = 1;
+}
+
+message ChatUser {
+    string id = 1;
+    string name = 2;
+    int32 unreadCount = 3;
+    UserMessage lastMessage = 4;
+}
+
+message ChatUserArray {
+    repeated ChatUser items = 1;
+}
+
+message Page {
+    int32 number = 1;
+    int32 size = 2;
+}
+
+message Offset {
+    int64 value = 1;
+    int32 limit = 2;
+}
