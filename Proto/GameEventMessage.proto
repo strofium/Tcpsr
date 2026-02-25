@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package com.axlebolt.bolt;
+
+import "Proto/InventoryMessage.proto";
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+message GetCurrentGameEventsResponse {
+    repeated CurrentGameEvent gameEvents = 1;
+}
+
+message CurrentGameEvent {
+    string id = 1;
+    string code = 2;
+    int64 dateSince = 3;
+    int64 dateUntil = 4;
+    int32 durationDays = 5;
+    repeated GamePass gamePasses = 6;
+    int32 points = 7;
+    int32 currentDay = 8;
+}
+
+message GamePass {
+    string id = 1;
+    string code = 2;
+    int32 keyItemDefinitionId = 3;
+    repeated GamePassLevel levels = 4;
+    int32 currentLevel = 5;
+}
+
+message GamePassLevel {
+    int32 level = 1;
+    int32 minPoints = 2;
+    RewardInfo reward = 3;
+}
+
+message RewardInfo {
+    repeated InventoryItemAmount items = 1;
+    repeated CurrencyAmount currencies = 2;
+    repeated RecipeInfo recipes = 3;
+}
+
+message InventoryItemAmount {
+    int32 itemDefinitionId = 1;
+    int32 quantity = 2;
+}
+
+message RecipeInfo {
+    string recipe = 1;
+    int32 quantity = 2;
+    repeated ExchangeEntity entities = 3;
+}
+
+message ExchangeEntity {
+    repeated InventoryItemAmount inventoryItems = 1;
+    repeated CurrencyAmount currencies = 2;
+}
+
+message GetCurrentChallengesRequest {
+    string gameEventId = 1;
+    bool completed = 2;
+}
+
+message GetCurrentChallengesResponse {
+    repeated CurrentChallenge challenges = 1;
+}
+
+message CurrentChallenge {
+    string gameEventChallengeId = 1;
+    string code = 2;
+    int32 keyItemDefinitionId = 3;
+    LocalizedTitle localizedTitle = 4;
+    string action = 5;
+    DayRange dayRange = 6;
+    string type = 7;
+    int32 eventPoints = 8;
+    int32 targetPoints = 9;
+    int32 currentPoints = 10;
+    RewardInfo reward = 11;
+}
+
+message LocalizedTitle {
+    string name = 1;
+    string description = 2;
+}
+
+message DayRange {
+    int32 from = 1;
+    int32 to = 2;
+}
+
+message ProgressChallengeRequest {
+    string gameEventChallengeId = 1;
+    int32 points = 2;
+}
+
+message ProgressChallengeResponse {
+    int32 challengePoints = 1;
+    int32 eventPoints = 2;
+    map<string, int32> eventGamePassLevels = 3;
+    bool completed = 4;
+}
+
+message ProgressGameEventRequest {
+    string gameEventId = 1;
+    int32 points = 2;
+}
+
+message ProgressGameEventResponse {
+    int32 eventPoints = 1;
+    map<string, int32> eventGamePassLevels = 2;
+}
