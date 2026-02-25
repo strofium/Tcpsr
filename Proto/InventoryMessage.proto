@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package com.axlebolt.bolt;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+message InventoryItemDefinition {
+    int32 id = 1;
+    string displayName = 2;
+    map<string, string> properties = 3;
+    repeated CurrencyAmount buyPrice = 4;
+    repeated CurrencyAmount sellPrice = 5;
+    bool canBeTraded = 6;
+}
+
+message CurrencyAmount {
+    int32 currencyId = 1;
+    int32 oldValue = 2 [deprecated = true];
+    float value = 3;
+}
+
+message InventoryItemProperties {
+    string value = 1;
+    bool stattrack = 2;
+    string collection = 3;
+}
+
+message InventoryItemsDefinitions {
+    repeated InventoryItemDefinition definitions = 1;
+}
+
+message InventoryItemPropertyDefinitions {
+    string propertyName = 1;
+    string propertyValue = 2;
+}
+
+message PlayerInventory {
+    repeated CurrencyAmount currencies = 1;
+    repeated InventoryItem inventoryItems = 2;
+}
+
+message InventoryItem {
+    int32 id = 1;
+    int32 itemDefinitionId = 2;
+    int32 quantity = 3;
+    int32 flags = 4;
+    int64 date = 5;
+    map<string, InventoryItemProperty> properties = 6;
+}
+
+message InventoryItemProperty {
+    PropertyType type = 1;
+    int32 intValue = 2;
+    float floatValue = 3;
+    string stringValue = 4;
+    bool booleanValue = 5;
+}
+
+enum PropertyType {
+    INT = 0;
+    FLOAT = 1;
+    STRING = 2;
+    BOOLEAN = 3;
+}
+
+message ExchangeResult {
+    repeated CurrencyAmount currencies = 1;
+    repeated InventoryItem inventoryItems = 2;
+}
