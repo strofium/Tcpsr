@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package Axlebolt.RpcSupport.Protobuf;
+
+message StringArray {
+    repeated string items = 1;
+}
+
+message Long {
+    int64 value = 1;
+}
