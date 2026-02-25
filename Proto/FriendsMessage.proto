@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf2;
+
+// Используем существующий Player из PlayerMessage.proto
+// Определяем только новые типы для Friends
+
+message PlayerFriend {
+    string playerId = 1;
+    string playerName = 2;
+    string avatarId = 3;
+    int32 relationshipStatus = 4;
+    int64 timeInGame = 5;
+    int64 registrationDate = 6;
+}
+
+message PlayerFriendArray {
+    repeated PlayerFriend items = 1;
+}
+
+message RelationshipStatus {
+    int32 value = 1;
+}
+
+message OnlineStatus {
+    int32 value = 1;
+}
+
+message AvatarBinary {
+    string id = 1;
+    bytes data = 2;
+}
+
+message AvatarBinaryArray {
+    repeated AvatarBinary items = 1;
+}
