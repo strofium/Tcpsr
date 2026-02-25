@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf;
+
+enum OnlineStatus {
+  StateOffline = 0;
+  StateOnline = 1;
+  StateBusy = 2;
+  StateInGame = 3;
+}
+
+message Player {
+    string id = 1;
+    string uid = 2;
+    string name = 3;
+    string avatarId = 4;
+    int64 timeInGame = 5;
+    PlayerStatus playerStatus = 6;
+    int64 logoutDate = 7;
+    int64 registrationDate = 8;
+}
+
+message PlayerStatus {
+    string playInGame = 1;
+    OnlineStatus onlineStatus = 2;
+}
+
+message Group {
+    string id = 1;
+    repeated string memberIds = 2;
+    string ownerId = 3;
+}
