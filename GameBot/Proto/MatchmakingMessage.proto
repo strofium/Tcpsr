@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package com.axlebolt.bolt;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+import "Proto/PlayerMessage.proto";
+
+enum LobbyType {
+    PRIVATE = 0;
+    FRIENDS_ONLY = 1;
+    PUBLIC = 2;
+    INVISIBLE = 3;
+}
+
+enum LobbyPlayerType {
+    MEMBER = 0;
+    SPECTATOR = 1;
+}
+
+enum RelationshipStatus {
+    NONE = 0;
+    BLOCKED = 1;
+    REQUEST_RECIPIENT = 2;
+    FRIEND = 3;
+    REQUEST_INITIATOR = 4;
+    IGNORED = 5;
+}
+
+message PlayerFriend {
+    Axlebolt.Bolt.Protobuf.Player player = 1;
+    RelationshipStatus relationshipStatus = 2;
+    int64 lastRelationshipUpdate = 3;
+}
+
+message Lobby {
+    string id = 1;
+    string ownerPlayerId = 2;
+    string name = 3;
+    LobbyType lobbyType = 4;
+    bool joinable = 5;
+    int32 maxMembers = 6;
+    map<string, string> data = 7;
+    repeated PlayerFriend members = 8;
+    repeated PlayerFriend invites = 9;
+    GameServer gameServer = 10;
+    PhotonGame photonGame = 11;
+    int32 maxSpectators = 12;
+    repeated PlayerFriend spectators = 13;
+    repeated PlayerFriend spectatorInvites = 14;
+}
+
+message LobbyInvite {
+    string lobbyId = 1;
+    Axlebolt.Bolt.Protobuf.Player inviter = 2;
+    int64 timestamp = 3;
+    LobbyPlayerType playerType = 4;
+}
+
+message GameServer {
+    string id = 1;
+    string name = 2;
+    string ip = 3;
+    int32 port = 4;
+    string map = 5;
+    int32 players = 6;
+    int32 maxPlayers = 7;
+    bool hasPassword = 8;
+}
+
+message GameServerDetails {
+    string id = 1;
+    string ip = 2;
+    int32 port = 3;
+    string map = 4;
+    string gameMode = 5;
+    int32 players = 6;
+    int32 maxPlayers = 7;
+}
+
+message PhotonGame {
+    string roomName = 1;
+    string region = 2;
+    map<string, string> customProperties = 3;
+}
+
+message Filter {
+    string key = 1;
+    string value = 2;
+    int32 comparison = 3;
+}
+
+enum LobbyDistanceFilter {
+    CLOSE = 0;
+    DEFAULT = 1;
+    FAR = 2;
+    WORLDWIDE = 3;
+}
