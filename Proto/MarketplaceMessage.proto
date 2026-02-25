@@ -1,0 +1,145 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf;
+
+import "Proto/PlayerMessage.proto";
+import "Proto/InventoryMessage.proto";
+
+enum MarketRequestType {
+    NONE_TYPE = 0;
+    SALE_REQUEST = 1;
+    PURCHASE_REQUEST = 2;
+}
+
+enum ClosingReason {
+    NONE_REASON = 0;
+    SUCCESS_TRANSACTION = 1;
+    NOT_ENOUGH_FUNDS = 2;
+    CANCELLED = 3;
+    SALE_REQUEST_NOT_FOUND = 4;
+}
+
+message MarketplaceSettings {
+    float commissionPercent = 1;
+    float minCommission = 2;
+    int32 currencyId = 3;
+    bool enabled = 4;
+}
+
+message CreateSaleRequestArgs {
+    int32 itemId = 1;
+    float price = 2;
+}
+
+message CreatePurchaseRequestArgs {
+    int32 itemDefinitionId = 1;
+    float price = 2;
+    int32 quantity = 3;
+}
+
+message CreatePurchaseBySaleArgs {
+    string saleId = 1;
+}
+
+message OpenRequest {
+    string id = 1;
+    Player creator = 2;
+    int32 itemDefinitionId = 3;
+    float price = 4;
+    int64 createDate = 5;
+    MarketRequestType type = 6;
+    int32 quantity = 7;
+    map<string, com.axlebolt.bolt.InventoryItemProperty> properties = 8;
+}
+
+message ProcessingRequest {
+    string id = 1;
+    int32 itemDefinitionId = 2;
+    float price = 3;
+    int32 currencyId = 4;
+    int32 quantity = 5;
+    int64 createdAt = 6;
+    int32 type = 9;
+}
+
+message ClosedRequest {
+    string id = 1;
+    string originId = 2;
+    Player creator = 3;
+    int32 itemDefinitionId = 4;
+    float price = 5;
+    int64 createDate = 6;
+    int64 closeDate = 7;
+    MarketRequestType type = 8;
+    Player partner = 9;
+    string partnerRequestId = 10;
+    ClosingReason reason = 11;
+    int32 quantity = 12;
+    map<string, com.axlebolt.bolt.InventoryItemProperty> properties = 13;
+}
+
+message Trade {
+    int32 id = 1;
+    int32 salesCount = 2;
+    int32 purchasesCount = 3;
+    float salesPrice = 4;
+    float purchasesPrice = 5;
+}
+
+message CancelRequestArgs {
+    string id = 1;
+}
+
+message GetTradeArgs {
+    int32 id = 1;
+}
+
+message GetTradesArgs {
+    repeated int32 itemDefinitionIds = 1;
+}
+
+message GetTradeOpenSaleRequestsArgs {
+    int32 id = 1;
+    int32 page = 2;
+    int32 size = 3;
+}
+
+message GetTradeOpenPurchaseRequestsArgs {
+    int32 id = 1;
+    int32 page = 2;
+    int32 size = 3;
+}
+
+message GetClosedRequestsArgs {
+    MarketRequestType type = 1;
+    ClosingReason reason = 2;
+    int32 page = 3;
+    int32 size = 4;
+}
+
+message GetClosedRequestsCountArgs {
+    MarketRequestType type = 1;
+    ClosingReason reason = 2;
+}
+
+// Events
+message OnPlayerRequestOpenedEvent {
+    OpenRequest request = 1;
+}
+
+message OnPlayerRequestClosedEvent {
+    ClosedRequest request = 1;
+    com.axlebolt.bolt.InventoryItem item = 2;
+}
+
+message OnTradeUpdatedEvent {
+    Trade trade = 1;
+}
+
+message OnTradeRequestOpenedEvent {
+    OpenRequest request = 1;
+}
+
+message OnTradeRequestClosedEvent {
+    ClosedRequest request = 1;
+}
