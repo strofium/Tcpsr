@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+package Axlebolt.Bolt.Protobuf2;
+
+enum SettingType {
+    String = 0;
+    Integer = 1;
+    Float = 2;
+    Bool = 3;
+}
+
+message GameSetting {
+    string key = 1;
+    string value = 2;
+    int32 intValue = 3;
+    float floatValue = 4;
+    bool boolValue = 5;
+    SettingType type = 6;
+}
