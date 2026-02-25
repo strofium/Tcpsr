@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+// Верификация устройства
+message Verification {
+    string deviceId = 1;
+    string apkHash = 2;
+    string signature = 3;
+    bool isRooted = 4;
+    repeated string allApps = 5;
+}
+
+// Запрос регистрации
+message RegisterRequest {
+    string username = 1;
+    string password = 2;
+    string email = 3;
+    string deviceId = 4;
+}
+
+// Запрос входа
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+    string deviceId = 3;
+}
+
+// Запрос смены пароля
+message ChangePasswordRequest {
+    string oldPassword = 1;
+    string newPassword = 2;
+}
+
+// Ответ авторизации
+message AuthResponse {
+    bool success = 1;
+    string token = 2;
+    string playerId = 3;
+    string playerName = 4;
+    string message = 5;
+    int32 errorCode = 6;
+}
+
+// Handshake для установки соединения
+message Handshake {
+    string ticket = 1;
+}
