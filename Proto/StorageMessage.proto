@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf2;
+
+message Storage {
+    string filename = 1;
+    bytes file = 2;
+}
