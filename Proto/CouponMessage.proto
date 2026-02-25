@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package com.axlebolt.bolt;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+message CurrencyAmountCoupon {
+    int32 currencyId = 1;
+    float value = 2;
+}
+
+message GenerateCouponRequest {
+    repeated int32 itemDefinitionIds = 1;
+    repeated CurrencyAmountCoupon currencies = 2;
+    int32 maxUses = 3;
+    int32 expirationDays = 4;
+    string customCode = 5;
+}
+
+message GenerateCouponResponse {
+    string couponId = 1;
+    string errorMessage = 2;
+}
+
+message GetPlayerCouponsResponse {
+    repeated Coupon coupons = 1;
+    int32 totalCount = 2;
+}
+
+message Coupon {
+    string id = 1;
+    string code = 2;
+    repeated int32 itemDefinitionIds = 3;
+    repeated CurrencyAmountCoupon currencies = 4;
+    int64 createdAt = 5;
+    int64 expiresAt = 6;
+    bool isActive = 7;
+    int32 maxUses = 8;
+    int32 currentUses = 9;
+    string creatorPlayerId = 10;
+}
+
+message ActivateCouponRequest {
+    string couponId = 1;
+}
+
+message ActivateCouponResponse {
+    bool success = 1;
+    string errorMessage = 2;
+    repeated int32 receivedItems = 3;
+    repeated CurrencyAmountCoupon receivedCurrencies = 4;
+}
+
+message GetCouponInfoRequest {
+    string couponCode = 1;
+}
+
+message DeleteCouponRequest {
+    string couponCode = 1;
+}
