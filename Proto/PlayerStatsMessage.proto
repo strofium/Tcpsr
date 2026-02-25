@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf2;
+
+enum StatDefType {
+    INT = 0;
+    FLOAT = 1;
+    AVGRATE = 2;
+}
+
+message Stats {
+    repeated PlayerStat stat = 1;
+    repeated string achievement = 2;
+}
+
+message PlayerStat {
+    string name = 1;
+    int32 intValue = 2;
+    float floatValue = 3;
+    float window = 4;
+    StatDefType type = 5;
+}
+
+message StorePlayerStat {
+    string name = 1;
+    int32 StoreInt = 2;
+}
