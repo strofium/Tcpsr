@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.axlebolt.bolt;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+message ItemFlags {
+    map<int32, int32> flags = 1;
+}
