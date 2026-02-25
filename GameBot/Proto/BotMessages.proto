@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package Axlebolt.RpcSupport.Protobuf;
+
+option csharp_namespace = "Axlebolt.RpcSupport.Protobuf";
+
+message RpcRequest {
+    string id = 1;
+    string serviceName = 2;
+    string methodName = 3;
+    repeated BinaryValue params = 4;
+}
+
+message ResponseMessage {
+    RpcResponse rpcResponse = 1;
+    EventResponse eventResponse = 2;
+}
+
+message RpcResponse {
+    string id = 1;
+    RpcException exception = 2;
+    BinaryValue return = 3;
+}
+
+message RpcException {
+    string id = 1;
+    int32 code = 2;
+    RpcExceptionProperty property = 3;
+}
+
+message RpcExceptionProperty {
+    string banCode = 1;
+    string reason = 2;
+    string uid = 3;
+}
+
+message EventResponse {
+    string listenerName = 1;
+    string eventName = 2;
+    repeated BinaryValue params = 3;
+}
+
+message BinaryValue {
+    bool isNull = 1;
+    repeated bytes array = 2;
+    bytes one = 3;
+}
+
+message String {
+    string value = 1;
+}
+
+message Integer {
+    int32 value = 1;
+}
+
+message Boolean {
+    bool value = 1;
+}
