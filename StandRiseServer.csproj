@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Auth" Version="1.65.0" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.65.0.1869" />
+    <PackageReference Include="Google.Protobuf" Version="3.25.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.60.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
+    <PackageReference Include="Telegram.Bot" Version="22.7.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Proto\**\*.proto" GrpcServices="None" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="UnityScripts\**" />
+    <Compile Remove="GameBot\**" />
+    <Compile Remove="ScriptsUnity\**" />
+    <Compile Remove="ScriptsMyGame\**" />
+    <Compile Remove="TelegramBot\**" />
+    <Compile Remove="RyzenBot\**" />
+    <EmbeddedResource Remove="UnityScripts\**" />
+    <EmbeddedResource Remove="GameBot\**" />
+    <EmbeddedResource Remove="ScriptsUnity\**" />
+    <EmbeddedResource Remove="ScriptsMyGame\**" />
+    <EmbeddedResource Remove="TelegramBot\**" />
+    <EmbeddedResource Remove="RyzenBot\**" />
+    <None Remove="UnityScripts\**" />
+    <None Remove="GameBot\**" />
+    <None Remove="ScriptsUnity\**" />
+    <None Remove="ScriptsMyGame\**" />
+    <None Remove="TelegramBot\**" />
+    <None Remove="RyzenBot\**" />
+  </ItemGroup>
+
+</Project>
