@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package Axlebolt.Bolt.Protobuf;
+
+option csharp_namespace = "Axlebolt.Bolt.Protobuf";
+
+message Handshake {
+    string ticket = 1;
+}
+
+message AuthResponse {
+    bool success = 1;
+    string token = 2;
+    string playerId = 3;
+    string playerName = 4;
+    string message = 5;
+    int32 errorCode = 6;
+}
