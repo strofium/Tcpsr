@@ -7,7 +7,7 @@ using StandRiseServer.GameServer;
 using StandRiseServer.TelegramMarketBot;
 
 // MongoDB Configuration
-const string defaultMongoString = "mongodb://mongo:vvsHryKyEkNaiIgYtMBtkIqdQIOSZPPE@maglev.proxy.rlwy.net:26476";
+const string defaultMongoString = "mongodb://mongo:jDJPPzQNeatgQpOqmHqiQAMUwDnMqrxr@crossover.proxy.rlwy.net:11991";
 string mongoConnectionString = Environment.GetEnvironmentVariable("MONGO_URL") ?? defaultMongoString;
 string databaseName = Environment.GetEnvironmentVariable("MONGO_DB") ?? "Ryzen";
 
@@ -278,3 +278,4 @@ catch (Exception ex)
     Logger.Error(ex.Message);
     Environment.Exit(1);
 }
+
